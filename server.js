@@ -18,6 +18,31 @@ app.get("/", function (request, response, next) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/:dateValue", function(request, response) {
+  //gets request data for date
+  var dateValue = request.params.dateValue;
+  //date formatting options
+  var dateFormat = {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  };
+  //add logic to check for valid unix and date
+  if(isNaN(dateValue)){
+    var naturalDate = new Date(dateValue);
+    naturalDate = naturalDate.toLocaleDateString("en-us", dateFormat);
+    
+    var unixDate = new Date(dateValue).getTime()/1000;
+  }
+  else {
+    var unixDate = dateValue;
+    var naturalDate = new Date(dateValue * 1000);
+    naturalDate = naturalDate.toLocaleDateString("en-us", dateFormat);
+  
+  }
+  response.json({unix: unixDate, natural: naturalDate});
+});
+
 app.get("/dreams", function (request, response, next) {
   response.send(dreams);
 });

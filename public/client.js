@@ -7,10 +7,16 @@
 $(function() {
   console.log('hello world :o');
   
-  $.get('/dreams', function(dreams) {
-    dreams.forEach(function(dream) {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-    });
+  $.get('/:dateValue', function(date) {
+    var dateFormat = {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  };
+      date = new Date().toLocaleDateString("en-us", dateFormat);
+    
+      $('<li></li>').text(date).appendTo('ul#dreams');
+    
   });
 
   $('form').submit(function(event) {
