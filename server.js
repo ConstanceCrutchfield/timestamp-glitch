@@ -53,6 +53,8 @@ app.post("/dreams", function (request, response) {
   response.sendStatus(200);
 });
 
+//remove unnessary default code
+
 // Simple in-memory store for now
 var dreams = [
   "Find and count some sheep",

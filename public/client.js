@@ -3,6 +3,8 @@
 
 // by default, you've got jQuery,
 // add other scripts at the bottom of index.html
+//show current time object upon page load
+//append times added via input box
 
 $(function() {
   console.log('hello world :o');
@@ -14,7 +16,7 @@ $(function() {
     day: "numeric"
   };
       date = new Date().toLocaleDateString("en-us", dateFormat);
-    
+    //append unix time along with date
       $('<li></li>').text(date).appendTo('ul#dreams');
     
   });
