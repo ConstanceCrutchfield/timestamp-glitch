@@ -27,18 +27,27 @@ app.get("/:dateValue", function(request, response) {
     month: "long",
     day: "numeric"
   };
-  //add logic to check for valid unix and date
+  
   if(isNaN(dateValue)){
     var naturalDate = new Date(dateValue);
     naturalDate = naturalDate.toLocaleDateString("en-us", dateFormat);
-    
+    //convert date to time in unix
     var unixDate = new Date(dateValue).getTime()/1000;
+    //both null if date is invalid
+    if(naturalDate == "Invalid Date"){
+      naturalDate = null;
+      unixDate = null;
+    }
   }
   else {
     var unixDate = dateValue;
     var naturalDate = new Date(dateValue * 1000);
     naturalDate = naturalDate.toLocaleDateString("en-us", dateFormat);
-  
+    
+    if(naturalDate == "Invalid Date"){
+      naturalDate = null;
+      unixDate = null;
+    }
   }
   response.json({unix: unixDate, natural: naturalDate});
 });
